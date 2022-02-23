@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {FC, useState} from 'react';
+import { styled } from '@mui/material';
+import Container from './Container';
+import BaseballContextProvider from './BaseballContext';
 
-function App() {
+const StyledContainer = styled(Container)({
+  height: '100%'
+})
+const App : FC<{}> = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BaseballContextProvider>
+      <StyledContainer/>
+    </BaseballContextProvider>
+  )
 }
 
 export default App;
