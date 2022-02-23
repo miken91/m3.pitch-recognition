@@ -5,7 +5,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const StyledButton = styled(Button) ({
     color: 'white',
-    my: 2
 })
 
 const PitchOptions : FC <{}> = () => {
@@ -22,7 +21,7 @@ const PitchOptions : FC <{}> = () => {
         handleSetPitchType(myValue as Pitch || pitch);
         setAnchorEl(null);
     };
-    
+
     return (
             <>  
                 <StyledButton

@@ -29,8 +29,6 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('/baseball.glb') as GLTFResult
 
   const { pitch, isRightHandedPitcher } = useContext(BaseballContext);
-  const rotate45Deg = Math.PI/180 * 45;
-  const rotate90Deg = Math.PI/180 * 90;
 
   const handle4SeamFastballRotation = () => {
     group.current?.rotateZ(isRightHandedPitcher ? -.15 : .15);
@@ -50,6 +48,8 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
 
   useEffect(() => {
     if(pitch) {
+      const rotate45Deg = Math.PI/180 * 45;
+      const rotate90Deg = Math.PI/180 * 90;
       group.current?.rotation.set(0,0,0);
       if(pitch === '2_SEAM_FASTBALL' || pitch === 'SLIDER') {
         group.current?.rotateZ(isRightHandedPitcher ? rotate45Deg: -rotate45Deg);

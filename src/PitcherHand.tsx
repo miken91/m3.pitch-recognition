@@ -26,12 +26,13 @@ const PitcherHand : FC <{}> = () => {
             value={alignment}
             onChange={handleAlignment}
             exclusive
+            size='medium'
         >
             <StyledToggleButton value={false}>
-                Left Handed
+                Left
             </StyledToggleButton>
             <StyledToggleButton value={true}>
-                Right Handed
+                Right
             </StyledToggleButton>
         </StyledToggleButtonGroup>
     )

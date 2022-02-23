@@ -1,5 +1,4 @@
-import { FC, useContext, useEffect } from 'react'
-import Grid from '@mui/material/Grid';
+import { FC } from 'react'
 import BaseballModel from './BaseballModel';
 import { AppBar, styled, Toolbar, Typography } from '@mui/material';
 import PitchOptions from './PitchOptions';
