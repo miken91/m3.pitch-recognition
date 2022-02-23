@@ -14,7 +14,7 @@ const BaseballModel : FC <{}> = () => {
                     <spotLight intensity={0.5} angle={0.1} penumbra={1} position={[10, 15, 10]} castShadow />
                     <Suspense fallback={null}>
                     <primitive object={new THREE.AxesHelper(10)} />
-                        <Baseball scale={20}/>
+                        <Baseball scale={.25}/>
                     </Suspense>
             </ContextBridge>
         </Canvas>
