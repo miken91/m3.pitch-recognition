@@ -7,7 +7,7 @@ import * as THREE from 'three'
 
 const Loader : FC <{}> = () => {
     const { progress } = useProgress();
-    return <Html center>{progress} % loaded</Html>
+    return <Html center>{progress.toFixed(0)} % loaded</Html>
 }
 
 const BaseballModel : FC <{}> = () => {

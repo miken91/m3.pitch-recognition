@@ -4,7 +4,7 @@ import { BaseballContext, Pitch } from './BaseballContext';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const StyledButton = styled(Button) ({
-    color: 'white',
+    color: 'black',
 })
 
 const PitchOptions : FC <{}> = () => {
@@ -25,48 +25,58 @@ const PitchOptions : FC <{}> = () => {
     return (
             <>  
                 <StyledButton
-                     aria-controls={open ? 'demo-customized-menu' : undefined}
-                     aria-haspopup="true"
-                     aria-expanded={open ? 'true' : undefined}
-                     variant="contained"
+                     id='Pitch Options'
+                     aria-label='Pitch Options'
+                     variant='outlined'
                      disableElevation
                      onClick={handleClick}
                      endIcon={<KeyboardArrowDownIcon/>}
                 >
-                    Pitch Options
+                    Type
                 </StyledButton>
                 <Menu
                     id="demo-customized-menu"
                     MenuListProps={{
-                    'aria-labelledby': 'demo-customized-button',
+                    'aria-labelledby': 'Pitch Options',
                     }}
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
                 >
                     <MenuItem 
+                        aria-label='4 Seam Fastball'
                         onClick={handleClose}
                         data-my-value={'4_SEAM_FASTBALL'}
                     >
                         4 Seam Fastball
                     </MenuItem>
                     <MenuItem 
+                        aria-label='2 Seam Fastball'
                         onClick={handleClose}
                         data-my-value={'2_SEAM_FASTBALL'}
                     >
                         2 Seam Fastball
                     </MenuItem>
                     <MenuItem 
+                        aria-label='Curveball'
                         onClick={handleClose}
                         data-my-value={'CURVEBALL'}
                     >
                         Curveball
                     </MenuItem>
                     <MenuItem 
+                        aria-label='Slider'
                         onClick={handleClose}
                         data-my-value={'SLIDER'}
                     >
                         Slider
+                    </MenuItem>
+                    <MenuItem 
+                        aria-label='Changeup'
+                        onClick={handleClose}
+                        data-my-value={'CHANGEUP'}
+                    >
+                        Changeup
                     </MenuItem>
                 </Menu>
             </>

@@ -25,22 +25,32 @@ type GLTFResult = GLTF & {
 export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF('/baseball.glb') as GLTFResult
-  const { pitch, isRightHandedPitcher } = useContext(BaseballContext);
+  const { pitch, isRightHandedPitcher, rotationsPerMinute } = useContext(BaseballContext);
 
   const handle4SeamFastballRotation = () => {
-    group.current?.rotateZ(isRightHandedPitcher ? -.15 : .15);
+    var speed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    group.current?.rotateZ(isRightHandedPitcher ? speed : -speed);
   }
 
   const handle2SeamFastballRotation = () => {
-    group.current?.rotateX(-.15);
+    group.current?.rotateX(Number((359 * rotationsPerMinute) * Math.PI/180));
   }
 
   const handleCurveballRotation = () => {
-    group.current?.rotateZ(isRightHandedPitcher ? .1 : -.1);
+    var speed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    group.current?.rotateZ(isRightHandedPitcher ? -speed : speed);
   }
 
   const handleSliderRotation = () => {
-    group.current?.rotateZ(.2)
+    var xSpeed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    var zSpeed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    group.current?.rotateX(isRightHandedPitcher ? xSpeed : xSpeed);
+    group.current?.rotateZ(isRightHandedPitcher ? -zSpeed : zSpeed);
+  }
+
+  const handleChangeupRotation = () => {
+    var speed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    group.current?.rotateZ(isRightHandedPitcher ? speed : -speed);
   }
 
   useEffect(() => {
@@ -48,11 +58,13 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
       group.current?.rotation.set(0,0,0);
       const rotate45Deg = Math.PI/180 * 45;
       const rotate90Deg = Math.PI/180 * 90;
-      if(pitch === '2_SEAM_FASTBALL' || pitch === 'SLIDER') {
+      if(pitch === '2_SEAM_FASTBALL') {
         group.current?.rotateZ(isRightHandedPitcher ? rotate45Deg: -rotate45Deg);
-      } else if(pitch === '4_SEAM_FASTBALL' || pitch === 'CURVEBALL') {
-        group.current?.rotateZ(isRightHandedPitcher? rotate45Deg: -rotate45Deg);
-        group.current?.rotateY(isRightHandedPitcher? rotate90Deg: -rotate90Deg);
+      } else if(pitch === '4_SEAM_FASTBALL' || pitch === 'CURVEBALL' || pitch === 'CHANGEUP') {
+        group.current?.rotateZ(isRightHandedPitcher ? rotate45Deg: -rotate45Deg);
+        group.current?.rotateY(isRightHandedPitcher ? rotate90Deg: -rotate90Deg);
+      } else if(pitch === 'SLIDER') {
+        group.current?.rotateZ(isRightHandedPitcher ? rotate45Deg: -rotate45Deg);
       }
     } 
   }, [pitch, isRightHandedPitcher])
@@ -66,6 +78,8 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
       handleCurveballRotation();
     } else if(pitch === 'SLIDER') {
       handleSliderRotation();
+    } else if(pitch === 'CHANGEUP') {
+      handleChangeupRotation();
     }
   });
   return (

@@ -1,6 +1,7 @@
 import { ToggleButtonGroup, ToggleButton, styled } from '@mui/material';
 import React, { FC, useContext } from 'react';
 import { BaseballContext } from './BaseballContext';
+
 const StyledToggleButtonGroup = styled(ToggleButtonGroup)({
     paddingRight: 8
 })
@@ -26,12 +27,17 @@ const PitcherHand : FC <{}> = () => {
             value={alignment}
             onChange={handleAlignment}
             exclusive
-            size='medium'
+            aria-label='Pitcher Hand'
+            size='small'
         >
-            <StyledToggleButton value={false}>
+            <StyledToggleButton 
+                aria-label='Left'
+                value={false}>
                 Left
             </StyledToggleButton>
-            <StyledToggleButton value={true}>
+            <StyledToggleButton
+                aria-label='Right' 
+                value={true}>
                 Right
             </StyledToggleButton>
         </StyledToggleButtonGroup>

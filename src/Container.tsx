@@ -3,6 +3,7 @@ import BaseballModel from './BaseballModel';
 import { AppBar, styled, Toolbar, Typography } from '@mui/material';
 import PitchOptions from './PitchOptions';
 import PitcherHand from './PitcherHand';
+import RotationsPerMinute from './RotationsPerMinute';
 const StyledContainer = styled('div')({
     display: 'flex',
     height: '100%'
@@ -18,10 +19,19 @@ const Container : FC <{}> = () => {
                             variant="h6"
                             noWrap
                             component="div"
-                            sx={{ mr: 2, flexGrow: 1 }}
+                            sx={{display: {xs: 'none', md: 'flex'}, mr: 2, flexGrow: 1 }}
                         >
                         Pitch Recoginition
                         </Typography>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
+                            sx={{display: {md: 'none'}, mr: 2, flexGrow: 1 }}
+                        >
+                        PR
+                        </Typography>
+                        <RotationsPerMinute/>
                         <PitcherHand/>
                         <PitchOptions/>
                     </Toolbar>
