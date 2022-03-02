@@ -1,4 +1,4 @@
-import React, {FC, createContext, useState, useEffect} from 'react';
+import React, { FC, createContext, useState, useEffect } from 'react';
 
 export type Pitch = '4_SEAM_FASTBALL' | '2_SEAM_FASTBALL' | 'CURVEBALL' | 'SLIDER' | 'CHANGEUP' | undefined
 

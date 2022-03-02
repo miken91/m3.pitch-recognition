@@ -18,8 +18,8 @@ const RotationsPerMinute : FC<{}> = () => {
             type='number' 
             value={rotationsPerMinute}
             inputProps={{min: 0, inputMode: 'numeric', pattern: '[0-9]*',  }}
-            onChange={(e)=> {
-                handleSetRotationsPerMinute(Number(e.target.value  < '0' ? 0 : e.target.value));
+            onChange={(event: React.ChangeEvent<HTMLInputElement>)=> {
+                handleSetRotationsPerMinute(Number(event.target.value));
             }} />
     )
 }

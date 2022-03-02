@@ -1,4 +1,4 @@
-import {FC, Suspense } from 'react';
+import { FC, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber'
 import Baseball from './Baseball';
 import { useContextBridge, Html, useProgress } from '@react-three/drei';
