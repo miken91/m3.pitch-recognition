@@ -42,10 +42,10 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
   }
 
   const handleSliderRotation = () => {
-    var xSpeed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    var ySpeed = Number((359 * (rotationsPerMinute - 5)) * Math.PI/180);
     var zSpeed = Number((359 * rotationsPerMinute) * Math.PI/180);
-    group.current?.rotateX(isRightHandedPitcher ? xSpeed : xSpeed);
     group.current?.rotateZ(isRightHandedPitcher ? -zSpeed : zSpeed);
+    group.current?.rotateY(isRightHandedPitcher ? -ySpeed: ySpeed);
   }
 
   const handleChangeupRotation = () => {
