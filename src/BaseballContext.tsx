@@ -5,25 +5,25 @@ export type Pitch = '4_SEAM_FASTBALL' | '2_SEAM_FASTBALL' | 'CURVEBALL' | 'SLIDE
 interface IBaseballContext {
     pitch: Pitch | undefined;
     isRightHandedPitcher: boolean;
-    rotationsPerMinute: number;
+    rotationsPerSecond: number;
     handleSetPitcherHand: (isRighHandedPitcher: boolean) => void;
     handleSetPitchType: (pitch: Pitch) => void;
-    handleSetRotationsPerMinute: (rotationsPerMinute: number) => void;
+    handleSetRotationsPerSecond: (rotationsPerSecond: number) => void;
 }
 
 export const BaseballContext = createContext<IBaseballContext>({
     pitch: undefined,
     isRightHandedPitcher: true,
-    rotationsPerMinute: 30,
+    rotationsPerSecond: 30,
     handleSetPitcherHand: () => null,
     handleSetPitchType: () => null,
-    handleSetRotationsPerMinute: () => null,
+    handleSetRotationsPerSecond: () => null,
 });
 
 const BaseballContextProvider: FC = ({children}) => {
     const [pitch, setPitch] = useState<Pitch>();
     const [isRightHandedPitcher, setPitcherHand] = useState<boolean>(true);
-    const [rotationsPerMinute, setRotationsPerMinute] =useState<number>(30);
+    const [rotationsPerSecond, setRotationsPerSecond] =useState<number>(30);
     
     const handleSetPitchType = (newState: Pitch) => {
         setPitch(newState);
@@ -41,21 +41,21 @@ const BaseballContextProvider: FC = ({children}) => {
         setPitcherHand(isRightHandedPitcher);
     }, [isRightHandedPitcher]);
 
-    const handleSetRotationsPerMinute = (newState: number) => {
-        setRotationsPerMinute(newState);
+    const handleSetRotationsPerSecond = (newState: number) => {
+        setRotationsPerSecond(newState);
     }
 
     useEffect(() => {
-        setRotationsPerMinute(rotationsPerMinute)
-    }, [rotationsPerMinute]);
+        setRotationsPerSecond(rotationsPerSecond)
+    }, [rotationsPerSecond]);
 
     const context = {
         pitch,
         isRightHandedPitcher,
-        rotationsPerMinute,
+        rotationsPerSecond,
         handleSetPitcherHand,
         handleSetPitchType,
-        handleSetRotationsPerMinute
+        handleSetRotationsPerSecond
     };
 
     return <BaseballContext.Provider value={context}>{children}</BaseballContext.Provider>

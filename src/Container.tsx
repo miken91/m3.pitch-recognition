@@ -3,7 +3,7 @@ import BaseballModel from './BaseballModel';
 import { AppBar, styled, Toolbar, Typography } from '@mui/material';
 import PitchOptions from './PitchOptions';
 import PitcherHand from './PitcherHand';
-import RotationsPerMinute from './RotationsPerMinute';
+import RotationsPerMinute from './RotationsPerSecond';
 const StyledContainer = styled('div')({
     display: 'flex',
     height: '100%'

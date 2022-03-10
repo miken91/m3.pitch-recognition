@@ -6,50 +6,50 @@ source: https://sketchfab.com/3d-models/8k-realistic-baseball-by-polyhaven-1a734
 title: 8K Realistic Baseball (By Polyhaven)
 */
 
-import * as THREE from 'three'
-import React, { useRef, useContext, useEffect } from 'react'
-import { useGLTF } from '@react-three/drei'
-import { GLTF } from 'three-stdlib'
-import { useFrame } from '@react-three/fiber'
-import { BaseballContext } from './BaseballContext'
+import { Mesh, MeshStandardMaterial, Group } from 'three';
+import { useRef, useContext, useEffect } from 'react'
+import * as drei from '@react-three/drei';
+import * as threeStdlib from 'three-stdlib';
+import * as fiber from '@react-three/fiber';
+import * as BaseballContext from './BaseballContext'
 
-type GLTFResult = GLTF & {
+type GLTFResult = threeStdlib.GLTF & {
   nodes: {
-    mesh_0: THREE.Mesh
+    mesh_0: Mesh
   }
   materials: {
-    baseball_01: THREE.MeshStandardMaterial
+    baseball_01: MeshStandardMaterial
   }
 }
 
 export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
-  const group = useRef<THREE.Group>()
-  const { nodes, materials } = useGLTF('/baseball.glb') as GLTFResult
-  const { pitch, isRightHandedPitcher, rotationsPerMinute } = useContext(BaseballContext);
+  const group = useRef<Group>()
+  const { nodes, materials } = drei.useGLTF('/baseball.glb') as GLTFResult
+  const { pitch, isRightHandedPitcher, rotationsPerSecond } = useContext(BaseballContext.BaseballContext);
 
   const handle4SeamFastballRotation = () => {
-    var speed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    var speed = Number((359 * rotationsPerSecond) * Math.PI/180);
     group.current?.rotateZ(isRightHandedPitcher ? speed : -speed);
   }
 
   const handle2SeamFastballRotation = () => {
-    group.current?.rotateX(Number((359 * rotationsPerMinute) * Math.PI/180));
+    group.current?.rotateX(Number((359 * rotationsPerSecond) * Math.PI/180));
   }
 
   const handleCurveballRotation = () => {
-    var speed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    var speed = Number((359 * rotationsPerSecond) * Math.PI/180);
     group.current?.rotateZ(isRightHandedPitcher ? -speed : speed);
   }
 
   const handleSliderRotation = () => {
-    var ySpeed = Number((359 * (rotationsPerMinute - 5)) * Math.PI/180);
-    var zSpeed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    var ySpeed = Number((359 * (rotationsPerSecond - 5)) * Math.PI/180);
+    var zSpeed = Number((359 * rotationsPerSecond) * Math.PI/180);
     group.current?.rotateZ(isRightHandedPitcher ? -zSpeed : zSpeed);
     group.current?.rotateY(isRightHandedPitcher ? -ySpeed: ySpeed);
   }
 
   const handleChangeupRotation = () => {
-    var speed = Number((359 * rotationsPerMinute) * Math.PI/180);
+    var speed = Number((359 * rotationsPerSecond) * Math.PI/180);
     group.current?.rotateZ(isRightHandedPitcher ? speed : -speed);
   }
 
@@ -69,7 +69,7 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
     } 
   }, [pitch, isRightHandedPitcher])
 
-  useFrame((state, delta) => {
+  fiber.useFrame((_state: any, _delta: any) => {
     if(pitch === '4_SEAM_FASTBALL') {
       handle4SeamFastballRotation();
     } else if(pitch === '2_SEAM_FASTBALL') {
@@ -83,10 +83,10 @@ export default function Model({ ...props }: JSX.IntrinsicElements['group']) {
     }
   });
   return (
-    <group ref={group} {...props} dispose={null}>
-          <mesh geometry={nodes.mesh_0.geometry} material={materials.baseball_01} />
-    </group>
+    <Group ref={group} {...props} dispose={null}>
+          <Mesh geometry={nodes.mesh_0.geometry} material={materials.baseball_01} />
+    </Group>
   )
 }
 
-useGLTF.preload('/baseball.glb')
+drei.useGLTF.preload('/baseball.glb')
